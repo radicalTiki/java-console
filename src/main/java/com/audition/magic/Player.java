@@ -1,5 +1,6 @@
 package com.audition.magic;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,9 +19,18 @@ public class Player {
     private List<Card> deck = Stream.of(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8)
             .map(Card::new)
             .collect(Collectors.toList());
+    private List<Card> hand = new ArrayList<>();
 
     public void Player(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void printHand() {
+        hand.forEach(card -> System.out.print("[Card: " + card.getManaCost() + "] "));
     }
 
 }

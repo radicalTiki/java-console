@@ -6,4 +6,8 @@ public class Card {
     Card(int manaCost) {
         this.manaCost = manaCost;
     }
+
+    public int getManaCost() {
+        return manaCost;
+    }
 }
