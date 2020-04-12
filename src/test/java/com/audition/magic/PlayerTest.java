@@ -13,4 +13,17 @@ public class PlayerTest {
         assertEquals(30, player.getCurrentHealth());
         assertEquals(0, player.getCurrentMana());
     }
+
+    @Test
+    public void playerManaTest() {
+        Player player = new Player("test");
+        player.incrementMana();
+        assertEquals(1, player.getCurrentMana());
+
+        player.descreaseMana(1);
+        assertEquals(0, player.getCurrentMana());
+
+        player.descreaseMana(1);
+        assertEquals(0, player.getCurrentMana());
+    }
 }

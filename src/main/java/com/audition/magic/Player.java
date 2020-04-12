@@ -2,6 +2,7 @@ package com.audition.magic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,6 +12,8 @@ import java.util.stream.Stream;
     * From the deck each player receives 3 random cards has his initial hand
 */
 public class Player {
+    private static final Logger logger = Logger.getLogger(Player.class.getName());
+
     private String name = "";
     private int health = 30;
     private int currentHealth = 30;
@@ -36,6 +39,17 @@ public class Player {
 
     public int getCurrentMana() {
         return currentMana;
+    }
+
+    public void incrementMana() {
+        currentMana += 1;
+    }
+
+    public void descreaseMana(int mana) {
+        if (currentMana - mana >= 0)
+            currentMana -= mana;
+        else
+            logger.info("not enough mana");
     }
 
     public void printHand() {
