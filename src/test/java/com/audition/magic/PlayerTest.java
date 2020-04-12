@@ -41,7 +41,7 @@ public class PlayerTest {
         Player player = new Player("test");
 
         //go 1 over our deck size, check damage and card size
-        IntStream.range(1, 20).forEach(e -> player.drawCard());
+        IntStream.range(0, 18).forEach(e -> player.drawCard());
         assertEquals(20, player.getHand().size());
         assertEquals(29, player.getCurrentHealth());
     }

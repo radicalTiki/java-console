@@ -21,7 +21,7 @@ public class Player {
     private static final Random random = new Random();
 
     private String name = "";
-    private int currentHealth = 30;
+    private int currentHealth = HEALTH;
     private int currentMana = 0;
 
     private List<Card> deck = Stream.of(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8)
@@ -32,7 +32,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         //initialize hand, draw 3 cards
-        IntStream.range(1, 3).forEach(e -> drawCard());
+        IntStream.range(0, 3).forEach(e -> drawCard());
     }
 
     public String getName() {
