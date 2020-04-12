@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class CardTest {
 
     @Test
-    public void playerInitialValueTest() {
+    public void CardManaTest() {
         Card card = new Card(0);
         assertEquals(0, card.getManaCost());
     }

@@ -33,6 +33,10 @@ public class Game {
         return player2;
     }
 
+    public int getRound() {
+        return round;
+    }
+
     /**
      * Run the round, and determine if there is a winner of the game.
      *
