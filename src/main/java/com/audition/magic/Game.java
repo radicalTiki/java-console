@@ -1,6 +1,7 @@
 package com.audition.magic;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * The active player receives 1 Mana slot up to a maximum of 10 total slots
@@ -48,12 +49,36 @@ public class Game {
         System.out.println("Health " + player1.getCurrentHealth() + " | Mana " + player1.getCurrentMana());
         player1.printHand();
 
+        List<Card> playableCards = player1.getPlayableCards();
+        while(playableCards.size() > 0) {
+            Optional<Card> cardOpt = playableCards.stream()
+                    .max(Card::compareTo);
+            Card card = cardOpt.get();
+
+            System.out.println("Playing card: " + card.getManaCost());
+            player2.decreaseHealth(player1.playCard(card));
+
+            playableCards = player1.getPlayableCards();
+        }
+
         System.out.println("Player : " + player2.getName() + " starting --");
         player2.drawCard();
         player2.incrementMana();
         player2.resetMana();
         System.out.println("Health " + player2.getCurrentHealth() + " | Mana " + player2.getCurrentMana());
         player2.printHand();
+
+        playableCards = player2.getPlayableCards();
+        while(playableCards.size() > 0) {
+            Optional<Card> cardOpt = playableCards.stream()
+                    .max(Card::compareTo);
+            Card card = cardOpt.get();
+
+            System.out.println("Playing card: " + card.getManaCost());
+            player1.decreaseHealth(player2.playCard(card));
+
+            playableCards = player2.getPlayableCards();
+        }
 
         round +=1;
 

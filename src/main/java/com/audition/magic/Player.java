@@ -69,6 +69,18 @@ public class Player {
         return hand;
     }
 
+    public int playCard(Card card) {
+        hand.remove(card);
+        currentMana -= card.getManaCost();
+        return card.getManaCost();
+    }
+
+    public List<Card> getPlayableCards() {
+        return hand.stream()
+                .filter(e -> e.getManaCost() <= currentMana)
+                .collect(Collectors.toList());
+    }
+
     public void drawCard() {
         if (deck.size() > 0) {
             hand.add(deck.remove(random.nextInt(deck.size())));
@@ -77,10 +89,6 @@ public class Player {
             logger.info("No cards left, taking damage");
             currentHealth -= 1;
         }
-    }
-
-    public void playHand() {
-
     }
 
     public void printHand() {
