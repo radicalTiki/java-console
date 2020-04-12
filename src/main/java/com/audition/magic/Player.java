@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 public class Player {
     private String name = "";
     private int health = 30;
+    private int currentHealth = 30;
     private int currentMana = 0;
     private int totalMana = 0;
 
@@ -21,7 +22,7 @@ public class Player {
             .collect(Collectors.toList());
     private List<Card> hand = new ArrayList<>();
 
-    public void Player(String name) {
+    public Player(String name) {
         this.name = name;
     }
 
@@ -29,8 +30,15 @@ public class Player {
         return name;
     }
 
+    public int getCurrentHealth() {
+        return health;
+    }
+
+    public int getCurrentMana() {
+        return currentMana;
+    }
+
     public void printHand() {
         hand.forEach(card -> System.out.print("[Card: " + card.getManaCost() + "] "));
     }
-
 }
