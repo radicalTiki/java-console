@@ -14,11 +14,12 @@ import java.util.stream.Stream;
 public class Player {
     private static final Logger logger = Logger.getLogger(Player.class.getName());
 
+    private static final int HEALTH = 30;
+    private static final int TOTAL_MANA = 10;
+
     private String name = "";
-    private int health = 30;
     private int currentHealth = 30;
     private int currentMana = 0;
-    private int totalMana = 0;
 
     private List<Card> deck = Stream.of(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8)
             .map(Card::new)
@@ -34,7 +35,11 @@ public class Player {
     }
 
     public int getCurrentHealth() {
-        return health;
+        return currentHealth;
+    }
+
+    public void decreaseHealth(int damage) {
+        currentHealth -= damage;
     }
 
     public int getCurrentMana() {
@@ -46,10 +51,12 @@ public class Player {
     }
 
     public void descreaseMana(int mana) {
-        if (currentMana - mana >= 0)
+        if (currentMana - mana >= 0) {
             currentMana -= mana;
-        else
+        }
+        else {
             logger.info("not enough mana");
+        }
     }
 
     public void printHand() {
