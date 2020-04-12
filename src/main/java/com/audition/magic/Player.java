@@ -8,20 +8,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-/**
-    * Each player starts the game with 30 Health and 0 Mana slots
-    * Each player starts with a deck of 20 Damage cards with the following Mana costs: 0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8
-    * From the deck each player receives 3 random cards has his initial hand
-*/
 public class Player {
     private static final Logger logger = Logger.getLogger(Player.class.getName());
 
-    private static final int HEALTH = 30;
-    private static final int TOTAL_MANA = 10;
+    private static final int MAX_HEALTH = 30;
+    private static final int MAX_MANA = 10;
     private static final Random random = new Random();
 
     private String name = "";
-    private int currentHealth = HEALTH;
+    private int currentHealth = MAX_HEALTH;
+    private int totalMana = 0;
     private int currentMana = 0;
 
     private List<Card> deck = Stream.of(0,0,1,1,2,2,2,3,3,3,3,4,4,4,5,5,6,6,7,8)
@@ -52,8 +48,12 @@ public class Player {
     }
 
     public void incrementMana() {
-        if (currentMana < TOTAL_MANA)
-            currentMana += 1;
+        if (totalMana < MAX_MANA)
+            totalMana += 1;
+    }
+
+    public void resetMana() {
+        currentMana = totalMana;
     }
 
     public void descreaseMana(int mana) {
@@ -79,7 +79,14 @@ public class Player {
         }
     }
 
+    public void playHand() {
+
+    }
+
     public void printHand() {
+        System.out.print("Current Hand: ");
         hand.forEach(card -> System.out.print("[Card: " + card.getManaCost() + "] "));
+        System.out.println(" ");
+        System.out.println(" ");
     }
 }

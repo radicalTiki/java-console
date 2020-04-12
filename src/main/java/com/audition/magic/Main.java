@@ -18,5 +18,10 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Welcome to the Trading Card Game - Magic!");
+
+        Game game = new Game();
+        while (game.startRound()) {
+
+        }
     }
 }
