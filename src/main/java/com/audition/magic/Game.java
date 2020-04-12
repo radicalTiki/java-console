@@ -39,6 +39,7 @@ public class Game {
      * @return true if we can continue, false if someone has died
      */
     public boolean startRound() {
+
         System.out.println("Starting round: " + round);
         System.out.println(" ");
 
@@ -56,7 +57,12 @@ public class Game {
             Card card = cardOpt.get();
 
             System.out.println("Playing card: " + card.getManaCost());
-            player2.decreaseHealth(player1.playCard(card));
+
+            if (!player2.decreaseHealth(player1.playCard(card))) {
+                winner = player1;
+                loser = player2;
+                return false;
+            }
 
             playableCards = player1.getPlayableCards();
         }
@@ -75,7 +81,12 @@ public class Game {
             Card card = cardOpt.get();
 
             System.out.println("Playing card: " + card.getManaCost());
-            player1.decreaseHealth(player2.playCard(card));
+
+            if (!player1.decreaseHealth(player2.playCard(card))) {
+                winner = player2;
+                loser = player1;
+                return false;
+            }
 
             playableCards = player2.getPlayableCards();
         }

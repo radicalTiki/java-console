@@ -20,8 +20,14 @@ public class Main {
         System.out.println("Welcome to the Trading Card Game - Magic!");
 
         Game game = new Game();
-        while (game.startRound()) {
 
+        while (game.startRound()) {
+            System.out.println("Round Over --");
+            System.out.println(" ");
         }
+
+        System.out.println("GAME OVER!");
+        System.out.println("WINNER: " + game.getWinner().getName());
+        System.out.println("LOSER: " + game.getLoser().getName());
     }
 }

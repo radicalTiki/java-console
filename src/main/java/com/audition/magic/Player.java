@@ -39,8 +39,10 @@ public class Player {
         return currentHealth;
     }
 
-    public void decreaseHealth(int damage) {
+    /** return true if player is alive **/
+    public boolean decreaseHealth(int damage) {
         currentHealth -= damage;
+        return currentHealth > 0;
     }
 
     public int getCurrentMana() {
