@@ -2,8 +2,10 @@ package com.audition.magic;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -16,6 +18,7 @@ public class Player {
 
     private static final int HEALTH = 30;
     private static final int TOTAL_MANA = 10;
+    private static final Random random = new Random();
 
     private String name = "";
     private int currentHealth = 30;
@@ -28,6 +31,8 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        //initialize hand, draw 3 cards
+        IntStream.range(1, 3).forEach(e -> drawCard());
     }
 
     public String getName() {
@@ -47,7 +52,8 @@ public class Player {
     }
 
     public void incrementMana() {
-        currentMana += 1;
+        if (currentMana < TOTAL_MANA)
+            currentMana += 1;
     }
 
     public void descreaseMana(int mana) {
@@ -55,7 +61,21 @@ public class Player {
             currentMana -= mana;
         }
         else {
-            logger.info("not enough mana");
+            logger.info("could not decrease mana, not enough mana left");
+        }
+    }
+
+    public List<Card> getHand() {
+        return hand;
+    }
+
+    public void drawCard() {
+        if (deck.size() > 0) {
+            hand.add(deck.remove(random.nextInt(deck.size())));
+        }
+        else {
+            logger.info("No cards left, taking damage");
+            currentHealth -= 1;
         }
     }
 
